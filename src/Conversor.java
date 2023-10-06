@@ -22,6 +22,9 @@ public class Conversor {
         if (digit <= 999) {
             udc(digit);
             return this.texto;
+        } else if (digit <= 999999) {
+            mm(digit);
+            return this.texto;
         } else {
             return "Numero fuera de rango";
         }
@@ -82,6 +85,39 @@ public class Conversor {
             valores999(digit);
         } else {
             System.out.println("Numero fuera de rango");
+        }
+    }
+
+    public void mm(int digit) {
+        // Cast to string
+        String numero = String.valueOf(digit);
+        int longitud = numero.length();
+
+        // Divide
+        String recorteLeft = numero.substring(0, longitud - 3);
+        String recorteRight = numero.substring(longitud - 3);
+
+        // cast int
+        int left = Integer.parseInt(recorteLeft);
+        int right = Integer.parseInt(recorteRight);
+
+
+        if (left == 1) {
+            if (right == 0) {
+                texto += "mil ";
+            } else {
+                texto += "mil ";
+                udc(right);
+            }
+        } else {
+            if (right == 0) {
+                udc(left);
+                texto += " mil ";
+            } else {
+                udc(left);
+                texto += " mil ";
+                udc(right);
+            }
         }
     }
 }
